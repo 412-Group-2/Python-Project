@@ -1,4 +1,4 @@
 # Python-Project
-Group 2's Python Repository
 
-I was told to make a read me by GitHub. Begrudgingly, I have made one. 
+Every Team member must make at least 1 edit to the main file.
+I propose to only do small portions of the code, so that others can easily come in and contribute.
