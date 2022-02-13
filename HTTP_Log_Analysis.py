@@ -25,6 +25,6 @@ if file_exists == False: # conditional statement so the program will be able to 
             f.write(chunk)
     f.close()
 
-'''with open('http_access_log.txt', 'r') as f: 
-    #print(f.read())'''
-# The above is the part that makes my IDE freeze. Don't think it should be doing that. 
+with open('http_access_log.txt') as f: 
+    for line in f:
+        print(line.rstrip())
