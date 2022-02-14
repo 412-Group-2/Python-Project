@@ -41,8 +41,11 @@ print ('TOTAL REQUESTS IN LOG :', requests)
 
 
 '''
-
-From here I would figure out how to put each line item into a list.
+with open('http_access_logs.txt') as file:
+    for line in file:
+        print(line.rstrip())
+        
+#this change prints the requests line by line. Becasue the file is large this is better than printing a single object (list) with all the info. 
 
 '''
 
