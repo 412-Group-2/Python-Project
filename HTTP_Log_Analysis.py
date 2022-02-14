@@ -14,6 +14,7 @@ cwd += '\http_access_log.txt' # obtain file path
 
 file_exists = exists(cwd) # check if file exists
 
+
 if file_exists == False: # conditional statement so the program will be able to determine if it needs to fetch the file or not. 
 
     url = 'https://s3.amazonaws.com/tcmg476/http_access_log'
@@ -25,12 +26,23 @@ if file_exists == False: # conditional statement so the program will be able to 
             f.write(chunk)
     f.close() # creation and closing of the file locally
 
+'''
 with open('http_access_log.txt') as f: 
     for line in f:
         print(line.rstrip()) # re-opening file and then iterating through each line 1 time. 
-        
-'''
-
-From here I would figure out how to put each line item into a list. 
+#Ben got rid of this and replaced it with a counter for all GET occurances in file.
+# IDK what "in the six months" means in the instructions but we'll cross that bridge tomorrow.
 
 '''
+file = open('http_access_log.txt') 
+data = file.read()
+requests = data.count("GET")
+print ('TOTAL REQUESTS IN LOG :', requests)
+
+
+'''
+
+From here I would figure out how to put each line item into a list.
+
+'''
+
