@@ -34,16 +34,38 @@ with open('http_access_log.txt') as f:
 # IDK what "in the six months" means in the instructions but we'll cross that bridge tomorrow.
 
 '''
+#count every valid request in the file
 file = open('http_access_log.txt') 
 data = file.read()
 requests = data.count("GET")
 print ('TOTAL REQUESTS IN LOG :', requests)
 
-count = 0
+
+#make a new file and cut off all but the last six months of requests
+with open('http_access_log.txt', 'r') as sixmon:
+    lines = sixmon.readlines()
+
+with open('six_months_access_log.txt', 'w') as sixmon2:
+    for number, line in enumerate(lines):
+        if number not in range(0, 166364):
+            sixmon2.write(line)
+#count the requests from the new file
+
+file = open('six_months_access_log.txt') 
+data = file.read()
+lastsixrequests = data.count("GET")
+print ('TOTAL REQUESTS OVER LAST SIX MONTHS FROM 11 OCT 1995 :', lastsixrequests)
+
+
+
+
 
 # Opens file (seems redundant but it was the only way I could get it to work)
-with open('http_access_log.txt') as file:
+
     # Do for each line in file
+
+
+'''
     for line in file:
         # Check if the line has brackets
         if "[" in line:
@@ -56,11 +78,12 @@ with open('http_access_log.txt') as file:
             # reads to data (put in another nested if statement?)
             # compare the data in temp to see if it is within 6 months from oct 11 1995
             count = count + 1
+    
             
 print ('TOTAL REQUESTS OVER LAST SIX MONTHS FROM 11 OCT 1995 :', count)
 
+#11/Apr/1995
 
-'''
 with open('http_access_logs.txt') as file:
     for line in file:
         print(line.rstrip())
