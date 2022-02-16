@@ -4,7 +4,7 @@ Created by Group 2
 This program will fetch a specific http log file from the specified address.
 Using this log file, it will be parsed to show the total number of logs in the past 6 months, and all time logs.
 '''
-
+import re
 import requests #necessary module
 import os # necessary module
 from os.path import exists #neccesary module
@@ -38,6 +38,26 @@ file = open('http_access_log.txt')
 data = file.read()
 requests = data.count("GET")
 print ('TOTAL REQUESTS IN LOG :', requests)
+
+count = 0
+
+# Opens file (seems redundant but it was the only way I could get it to work)
+with open('http_access_log.txt') as file:
+    # Do for each line in file
+    for line in file:
+        # Check if the line has brackets
+        if "[" in line:
+            # Use regex to find the date of the log line
+            temp = re.search(r"\[(.*?)\]", line)
+            # important: temp.group(0) is the regex'd info, .strip removes the brackets from that
+            # format is DD/MMM/YYYY:HH:MM:SS -Timezone (I think?)
+            # print(temp.group(0).strip("[]")) (I AM FOR TESTING)
+            # you might be able to convert to datetime and work from there
+            # reads to data (put in another nested if statement?)
+            # compare the data in temp to see if it is within 6 months from oct 11 1995
+            count = count + 1
+            
+print ('TOTAL REQUESTS OVER LAST SIX MONTHS FROM 11 OCT 1995 :', count)
 
 
 '''
