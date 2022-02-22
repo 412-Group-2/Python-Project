@@ -8,6 +8,7 @@ Using this log file, it will be parsed to show the total number of logs in the p
 import requests
 import os
 from os.path import exists
+from datetime import datetime
 
 cwd = os.getcwd()
 cwd += '\http_access_log.txt' # obtain file path 
@@ -30,6 +31,20 @@ if file_exists == False: # conditional statement so the program will be able to 
 # Q1: How many requests were made on each day?
 # A1: Count total number of requests, divide by number of days in file to average out.
 
+file = open('http_access_log.txt', 'r') # counting every single request
+data = file.read()
+requests = data.count("GET") # This value is the total number of requests in the file
+file.close()
+
+
+file = open('http_access_log.txt', 'r') # Open new file object (have to do this or it won't let your readlines())
+
+dayFirst = (file.readline())[11:22] #Puts the date (24/Oct/1994) as the valuable for this variable
+dayFinal = (file.readlines()[-1])[11:22] #Puts the date (11/Oct/1995) as the valuable for this variable
+
+#If someone can set up something with datetime to get the difference in days that finishes this first problem
+
+
 # Q2: How many requests were made on a week-by-week basis? Per month?
 # A2: Take previous total number of requests and divide by number of weeks, then months.
 
@@ -48,7 +63,8 @@ if file_exists == False: # conditional statement so the program will be able to 
 # Q7: Now every single month needs its own log file. 
 # A7: We need to seperate the original file into 12 months and give each month its own new log file. Could use one function for each month's file to keep it clean. 
 
-### BELOW IS ALL THE OF PART 1'S FILE PARSING THAT WE DID. WE DON'T NEED THIS EXACT CODE ANYMORE (it needs to get deleted when finished) BUT I LEFT IT DOWN HERE FOR REFERENCE 
+'''
+BELOW IS ALL THE OF PART 1'S FILE PARSING THAT WE DID. WE DON'T NEED THIS EXACT CODE ANYMORE, BUT I LEFT IT DOWN HERE FOR REFERENCE ###
 
 #count every valid request in the file
 file = open('http_access_log.txt') 
@@ -71,3 +87,4 @@ file = open('six_months_access_log.txt')
 data = file.read()
 lastsixrequests = data.count("GET")
 print ('TOTAL REQUESTS OVER LAST SIX MONTHS FROM 11 OCT 1995 :', lastsixrequests)
+'''
