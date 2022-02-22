@@ -14,6 +14,7 @@ cwd += '\http_access_log.txt' # obtain file path
 
 file_exists = exists(cwd) # check if file exists
 
+
 if file_exists == False: # conditional statement so the program will be able to determine if it needs to fetch the file or not. 
 
     url = 'https://s3.amazonaws.com/tcmg476/http_access_log'
@@ -24,6 +25,30 @@ if file_exists == False: # conditional statement so the program will be able to 
         if chunk:
             f.write(chunk)
     f.close() # creation and closing of the file locally
+
+
+# Q1: How many requests were made on each day?
+# A1: Count total number of requests, divide by number of days in file to average out.
+
+# Q2: How many requests were made on a week-by-week basis? Per month?
+# A2: Take previous total number of requests and divide by number of weeks, then months.
+
+# Q3: What percentage of the requests were not successful (any 4xx status code)?
+# A3: How many requests have a 4XX status code?
+
+# Q4: What percentage of the requests were redirected elsewhere (any 3xx codes)?
+# A4: How many requests have a 3XX code? Divide this number by total requests for answer.
+
+# Q5: What was the most-requested file?
+# Q5: 
+    
+# Q6: What was the least-requested file?
+# Q6: 
+
+# Q7: Now every single month needs its own log file. 
+# A7: We need to seperate the original file into 12 months and give each month its own new log file. Could use one function for each month's file to keep it clean. 
+
+### BELOW IS ALL THE OF PART 1'S FILE PARSING THAT WE DID. WE DON'T NEED THIS EXACT CODE ANYMORE, BUT I LEFT IT DOWN HERE FOR REFERENCE ###
 
 #count every valid request in the file
 file = open('http_access_log.txt') 
