@@ -48,7 +48,7 @@ if file_exists == False: # conditional statement so the program will be able to 
 # Q7: Now every single month needs its own log file. 
 # A7: We need to seperate the original file into 12 months and give each month its own new log file. Could use one function for each month's file to keep it clean. 
 
-### BELOW IS ALL THE OF PART 1'S FILE PARSING THAT WE DID. WE DON'T NEED THIS EXACT CODE ANYMORE, BUT I LEFT IT DOWN HERE FOR REFERENCE ###
+### BELOW IS ALL THE OF PART 1'S FILE PARSING THAT WE DID. WE DON'T NEED THIS EXACT CODE ANYMORE (it needs to get deleted when finished) BUT I LEFT IT DOWN HERE FOR REFERENCE 
 
 #count every valid request in the file
 file = open('http_access_log.txt') 
