@@ -27,14 +27,6 @@ if file_exists == False: # conditional statement so the program will be able to 
             f.write(chunk)
     f.close() # creation and closing of the file locally
 
-'''
-with open('http_access_log.txt') as f: 
-    for line in f:
-        print(line.rstrip()) # re-opening file and then iterating through each line 1 time. 
-#Ben got rid of this and replaced it with a counter for all GET occurances in file.
-# IDK what "in the six months" means in the instructions but we'll cross that bridge tomorrow.
-
-'''
 #count every valid request in the file
 file = open('http_access_log.txt') 
 data = file.read()
@@ -56,40 +48,3 @@ file = open('six_months_access_log.txt')
 data = file.read()
 lastsixrequests = data.count("GET")
 print ('TOTAL REQUESTS OVER LAST SIX MONTHS FROM 11 OCT 1995 :', lastsixrequests)
-
-
-
-
-
-# Opens file (seems redundant but it was the only way I could get it to work)
-
-    # Do for each line in file
-
-
-'''
-    for line in file:
-        # Check if the line has brackets
-        if "[" in line:
-            # Use regex to find the date of the log line
-            temp = re.search(r"\[(.*?)\]", line)
-            # important: temp.group(0) is the regex'd info, .strip removes the brackets from that
-            # format is DD/MMM/YYYY:HH:MM:SS -Timezone (I think?)
-            # print(temp.group(0).strip("[]")) (I AM FOR TESTING)
-            # you might be able to convert to datetime and work from there
-            # reads to data (put in another nested if statement?)
-            # compare the data in temp to see if it is within 6 months from oct 11 1995
-            count = count + 1
-    
-            
-print ('TOTAL REQUESTS OVER LAST SIX MONTHS FROM 11 OCT 1995 :', count)
-
-#11/Apr/1995
-
-with open('http_access_logs.txt') as file:
-    for line in file:
-        print(line.rstrip())
-        
-#this change prints the requests line by line. Becasue the file is large this is better than printing a single object (list) with all the info. 
-
-'''
-
