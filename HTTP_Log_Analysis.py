@@ -4,17 +4,15 @@ Created by Group 2
 This program will fetch a specific http log file from the specified address.
 Using this log file, it will be parsed to show the total number of logs in the past 6 months, and all time logs.
 '''
-import re
-import requests #necessary module
-import os # necessary module
-from os.path import exists #neccesary module
-from datetime import datetime
+
+import requests
+import os
+from os.path import exists
 
 cwd = os.getcwd()
 cwd += '\http_access_log.txt' # obtain file path 
 
 file_exists = exists(cwd) # check if file exists
-
 
 if file_exists == False: # conditional statement so the program will be able to determine if it needs to fetch the file or not. 
 
