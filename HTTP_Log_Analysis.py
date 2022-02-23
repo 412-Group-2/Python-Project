@@ -37,7 +37,6 @@ file = open('http_access_log.txt', 'r')
 # A1: Count total number of requests, divide by number of days in file to average out.
 # Note: This will probably need to be modified, I think he wants us to do it by day of the week (Monday, Tuesday etc.)
 
-"""
 file = open('http_access_log.txt', 'r') # counting every single request
 data = file.read()
 requests = data.count("GET") # This value is the total number of requests in the file
@@ -59,8 +58,6 @@ print(NumDays)
 Days_in_year = NumDays.days #converts timedelta object into integer for calculation
 
 print( 'Avg requests per day:', round(requests/Days_in_year, 2)) #returns requests/day
-#anything else needed here?
-"""
 
 # Q2: How many requests were made on a week-by-week basis? Per month?
 # A2: Take previous total number of requests and divide by number of weeks, then months.
@@ -159,29 +156,3 @@ fileCount() # probably should be moved to end because a response can be given to
 
 # Q7: Now every single month needs its own log file. 
 # A7: We need to seperate the original file into 12 months and give each month its own new log file. Could use one function for each month's file to keep it clean. 
-
-'''
-BELOW IS ALL THE OF PART 1'S FILE PARSING THAT WE DID. WE DON'T NEED THIS EXACT CODE ANYMORE, BUT I LEFT IT DOWN HERE FOR REFERENCE ###
-
-#count every valid request in the file
-file = open('http_access_log.txt') 
-data = file.read()
-requests = data.count("GET")
-print ('TOTAL REQUESTS IN LOG :', requests)
-
-
-#make a new file and cut off all but the last six months of requests
-with open('http_access_log.txt', 'r') as sixmon:
-    lines = sixmon.readlines()
-
-with open('six_months_access_log.txt', 'w') as sixmon2:
-    for number, line in enumerate(lines):
-        if number not in range(0, 166364):
-            sixmon2.write(line)
-#count the requests from the new file
-
-file = open('six_months_access_log.txt') 
-data = file.read()
-lastsixrequests = data.count("GET")
-print ('TOTAL REQUESTS OVER LAST SIX MONTHS FROM 11 OCT 1995 :', lastsixrequests)
-'''
