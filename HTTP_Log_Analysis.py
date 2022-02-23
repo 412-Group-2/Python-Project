@@ -93,12 +93,12 @@ months = {
 }
 
 for line in file:
-  total_count +=1 
-  parts = regex.split(line)
-  datestamp = datetime.strptime(parts[2], '%d/%b/%Y')
-  if len(parts) != 8:
-    continue
-  months[datestamp.month] += 1
+    total_count +=1 
+    parts = regex.split(line)
+    if len(parts) != 8:
+        continue
+    datestamp = datetime.strptime(parts[2], '%d/%b/%Y')
+    months[datestamp.month] += 1
 print(months)
 
 # A7: We need to seperate the original file into 12 months and give each month its own new log file. Could use one function for each month's file to keep it clean. 
