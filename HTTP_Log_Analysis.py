@@ -11,6 +11,7 @@ from os.path import exists
 from datetime import datetime
 import re
 import collections
+import calendar
 
 cwd = os.getcwd()
 cwd += '\http_access_log.txt' # obtain file path 
@@ -64,6 +65,17 @@ print( 'Avg requests per day:', round(requests/Days_in_year, 2)) #returns reques
 # Q2: How many requests were made on a week-by-week basis? Per month?
 # A2: Take previous total number of requests and divide by number of weeks, then months.
 total_count = 0
+
+days = {
+  "Monday": 0,
+  "Tuesday": 0, 
+  "Wednesday": 0, 
+  "Thursday": 0,
+  "Friday": 0, 
+  "Saturday": 0,
+  "Sunday": 0
+}
+
 months = {
   1: 0,
   2: 0, 
@@ -86,14 +98,19 @@ for line in file:
     if len(parts) != 8:
         continue
     datestamp = datetime.strptime(parts[2], '%d/%b/%Y')
+    days[str(calendar.day_name[datestamp.weekday()])] += 1
     months[datestamp.month] += 1
 
-print("Requests by month")
+print("Requests by day of the week:")
+for a, b in days.items():
+    print(f'{a}: {b}')
+
+print("\nRequests by month:")
 for i in months:
     print("%s: %i" % (month_names[i-1], months[i]))
 
 # Q3: What percentage of the requests were not successful (any 4xx status code)?
-([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (4\d\d )
+#([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (4\d\d )
 # A3: How many requests have a 4XX status code?
 
 file = open('http_access_log.txt', 'r') 
@@ -102,7 +119,7 @@ requests = data.count("GET")
 regex_q3 = re.compile('([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (4\d\d )') # REGEXP
 matches = re.findall(regex_q3, data) # Get the matches for the error code in the file
 request4XX = len(matches) / requests
-print("The percent of requests that were not succesful was {0}".format(request4XX))
+print("\nThe percent of requests that were not succesful was {0}".format(request4XX))
 file.close()
 
 # Q4: What percentage of the requests were redirected elsewhere (any 3xx codes)?
@@ -122,7 +139,7 @@ def fileCount():
 				pass
 	counter = collections.Counter(filelog)
 	for count in counter.most_common(1):														
-		print("Most commonly requested file is: {} with {} requests.".format(str(count[0]), str(count[1])))
+		print("\nMost commonly requested file is: {} with {} requests.".format(str(count[0]), str(count[1])))
 	for count in counter.most_common():					#checking for file requests that only occur once as they must be the least requested
 		if str(count[1]) == '1':
 			least_common.append(count[0])
