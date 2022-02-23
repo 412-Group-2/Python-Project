@@ -78,6 +78,7 @@ months = {
   11: 0,
   12: 0
 }
+month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 for line in file:
     total_count +=1 
@@ -86,7 +87,10 @@ for line in file:
         continue
     datestamp = datetime.strptime(parts[2], '%d/%b/%Y')
     months[datestamp.month] += 1
-print(months)
+
+print("Requests by month")
+for i in months:
+    print("%s: %i" % (month_names[i-1], months[i]))
 
 # Q3: What percentage of the requests were not successful (any 4xx status code)?
 ([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (4\d\d )
@@ -94,6 +98,7 @@ print(months)
 
 file = open('http_access_log.txt', 'r') 
 data = file.read()
+requests = data.count("GET")
 regex_q3 = re.compile('([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (4\d\d )') # REGEXP
 matches = re.findall(regex_q3, data) # Get the matches for the error code in the file
 request4XX = len(matches) / requests
