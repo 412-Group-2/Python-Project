@@ -29,7 +29,8 @@ if file_exists == False: # conditional statement so the program will be able to 
     f.close() # creation and closing of the file locally
 
 regex = re.compile('([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? ([0-9]*?) [0-9]*?')
-    
+file = open('http_access_log.txt', 'r')
+
 # Q1: How many requests were made on each day?
 # A1: Count total number of requests, divide by number of days in file to average out.
 # Note: This will probably need to be modified, I think he wants us to do it by day of the week (Monday, Tuesday etc.)
@@ -91,23 +92,15 @@ months = {
   12: 0
 }
 
-regex = re.compile('([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? ([0-9]*?) [0-9]*?')
-
-
-for line in entire_log:
-  
+for line in file:
   total_count +=1 
-  
   parts = regex.split(line)
-  
   datestamp = datetime.strptime(parts[2], '%d/%b/%Y')
-
   if len(parts) != 8:
     continue
-
   months[datestamp.month] += 1
-
 print(months)
+
 # A7: We need to seperate the original file into 12 months and give each month its own new log file. Could use one function for each month's file to keep it clean. 
 
 '''
