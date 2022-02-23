@@ -31,6 +31,7 @@ if file_exists == False: # conditional statement so the program will be able to 
 
 # Q1: How many requests were made on each day?
 # A1: Count total number of requests, divide by number of days in file to average out.
+# Note: This will probably need to be modified, I think he wants us to do it by 
 
 file = open('http_access_log.txt', 'r') # counting every single request
 data = file.read()
@@ -71,7 +72,7 @@ print( 'Avg requests per day:', round(requests/Days_in_year, 2)) #returns reques
 # Q6: 
 
 # Q7: Now every single month needs its own log file. 
-regex = re.compile('([a-z]*?) - - \[(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? ([0-9]*?) [0-9]*?')
+regex = re.compile('([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? ([0-9]*?) [0-9]*?')
 # A7: We need to seperate the original file into 12 months and give each month its own new log file. Could use one function for each month's file to keep it clean. 
 
 '''
