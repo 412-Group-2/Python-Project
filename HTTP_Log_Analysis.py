@@ -75,6 +75,39 @@ print( 'Avg requests per day:', round(requests/Days_in_year, 2)) #returns reques
 # Q6: 
 
 # Q7: Now every single month needs its own log file. 
+total_count = 0
+months = {
+  1: 0,
+  2: 0, 
+  3: 0, 
+  4: 0,
+  5: 0, 
+  6: 0,
+  7: 0, 
+  8: 0,
+  9: 0, 
+  10: 0, 
+  11: 0,
+  12: 0
+}
+
+regex = re.compile('([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? ([0-9]*?) [0-9]*?')
+
+
+for line in entire_log:
+  
+  total_count +=1 
+  
+  parts = regex.split(line)
+  
+  datestamp = datetime.strptime(parts[2], '%d/%b/%Y')
+
+  if len(parts) != 8:
+    continue
+
+  months[datestamp.month] += 1
+
+print(months)
 # A7: We need to seperate the original file into 12 months and give each month its own new log file. Could use one function for each month's file to keep it clean. 
 
 '''
