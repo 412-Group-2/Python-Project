@@ -92,6 +92,14 @@ print(months)
 ([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (4\d\d )
 # A3: How many requests have a 4XX status code?
 
+file = open('http_access_log.txt', 'r') 
+data = file.read()
+regex_q3 = re.compile('([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (4\d\d )') # REGEXP
+matches = re.findall(regex_q3, data) # Get the matches for the error code in the file
+request4XX = len(matches) / requests
+print("The percent of requests that were not succesful was {0}".format(request4XX))
+file.close()
+
 # Q4: What percentage of the requests were redirected elsewhere (any 3xx codes)?
 # A4: How many requests have a 3XX code? Divide this number by total requests for answer.
 
