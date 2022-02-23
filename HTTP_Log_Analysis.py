@@ -9,6 +9,7 @@ import requests
 import os
 from os.path import exists
 from datetime import datetime
+import re
 
 cwd = os.getcwd()
 cwd += '\http_access_log.txt' # obtain file path 
