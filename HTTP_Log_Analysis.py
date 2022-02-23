@@ -31,7 +31,7 @@ if file_exists == False: # conditional statement so the program will be able to 
 
 # Q1: How many requests were made on each day?
 # A1: Count total number of requests, divide by number of days in file to average out.
-# Note: This will probably need to be modified, I think he wants us to do it by 
+# Note: This will probably need to be modified, I think he wants us to do it by day of the week (Monday, Tuesday etc.)
 
 file = open('http_access_log.txt', 'r') # counting every single request
 data = file.read()
