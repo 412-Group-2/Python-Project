@@ -115,15 +115,22 @@ for i in months:
 
 file = open('http_access_log.txt', 'r') 
 data = file.read()
-requests = data.count("GET")
-regex_q3 = re.compile('([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (4\d\d )') # REGEXP
-matches = re.findall(regex_q3, data) # Get the matches for the error code in the file
-request4XX = len(matches) / requests
-print("\nThe percent of requests that were not succesful was {0}".format(request4XX))
+regex_q3 = re.compile('([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (4\d\d )')
+matches = re.findall(regex_q3, data)
+request4XX = round(len(matches) / requests * 100, 2)
+print("\nThe percent of requests that were not succesful (4XX) was {0}%".format(request4XX))
 file.close()
 
 # Q4: What percentage of the requests were redirected elsewhere (any 3xx codes)?
 # A4: How many requests have a 3XX code? Divide this number by total requests for answer.
+
+file = open('http_access_log.txt', 'r') 
+data = file.read()
+regex_q4 = re.compile('([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (3\d\d )')
+matches2 = re.findall(regex_q4, data)
+request3XX = round(len(matches2) / requests * 100, 2)
+print("\nThe percent of requests that were redirected elsewhere (3XX) was {0}%".format(request3XX))
+file.close()
 
 # Q5: What was the most-requested file?
 # Q6: What was the least-requested file?
