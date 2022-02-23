@@ -62,20 +62,6 @@ print( 'Avg requests per day:', round(requests/Days_in_year, 2)) #returns reques
 
 # Q2: How many requests were made on a week-by-week basis? Per month?
 # A2: Take previous total number of requests and divide by number of weeks, then months.
-
-# Q3: What percentage of the requests were not successful (any 4xx status code)?
-# A3: How many requests have a 4XX status code?
-
-# Q4: What percentage of the requests were redirected elsewhere (any 3xx codes)?
-# A4: How many requests have a 3XX code? Divide this number by total requests for answer.
-
-# Q5: What was the most-requested file?
-# Q5: 
-    
-# Q6: What was the least-requested file?
-# Q6: 
-
-# Q7: Now every single month needs its own log file. 
 total_count = 0
 months = {
   1: 0,
@@ -101,6 +87,19 @@ for line in file:
     months[datestamp.month] += 1
 print(months)
 
+# Q3: What percentage of the requests were not successful (any 4xx status code)?
+# A3: How many requests have a 4XX status code?
+
+# Q4: What percentage of the requests were redirected elsewhere (any 3xx codes)?
+# A4: How many requests have a 3XX code? Divide this number by total requests for answer.
+
+# Q5: What was the most-requested file?
+# Q5: 
+    
+# Q6: What was the least-requested file?
+# Q6: 
+
+# Q7: Now every single month needs its own log file. 
 # A7: We need to seperate the original file into 12 months and give each month its own new log file. Could use one function for each month's file to keep it clean. 
 
 '''
