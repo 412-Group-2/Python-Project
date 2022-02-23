@@ -10,6 +10,7 @@ import os
 from os.path import exists
 from datetime import datetime
 import re
+import collections
 
 cwd = os.getcwd()
 cwd += '\http_access_log.txt' # obtain file path 
@@ -65,10 +66,29 @@ print( 'Avg requests per day:', round(requests/Days_in_year, 2)) #returns reques
 # A4: How many requests have a 3XX code? Divide this number by total requests for answer.
 
 # Q5: What was the most-requested file?
-# Q5: 
-    
 # Q6: What was the least-requested file?
-# Q6: 
+# Q5 & 6: def fileCount():
+def fileCount():
+	filelog = []
+	least_common = []
+	with open('http_access_log.txt') as logs:
+		for line in logs:
+			try:
+				filelog.append(line[line.index("GET")+4:line.index("HTTP")])		#find all files between GET requests and HTTP protocol"
+			except:
+				pass
+	counter = collections.Counter(filelog)
+	for count in counter.most_common(1):														
+		print("Most commonly requested file is: {} with {} requests.".format(str(count[0]), str(count[1])))
+	for count in counter.most_common():					#checking for file requests that only occur once as they must be the least requested
+		if str(count[1]) == '1':
+			least_common.append(count[0])
+	if least_common:										#many file requests that were only requested once 													
+		response = input("There were {} file(s) that were requested once, do you want to see them all? (y/n)".format(len(least_common)))
+		if response == 'y' or response == 'Y':
+			for file in least_common:
+				print(file)
+fileCount() # probably should be moved to end because a response can be given to get more data
 
 # Q7: Now every single month needs its own log file. 
 regex = re.compile('([a-z]*?) - - \[(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? ([0-9]*?) [0-9]*?')
