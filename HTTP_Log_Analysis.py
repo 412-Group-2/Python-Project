@@ -49,7 +49,10 @@ date_final = datetime.strptime('11/Oct/1995', '%d/%b/%Y')
 NumDays = date_final - date_first 
 print(NumDays)
 
-#this returns the difference in days but idk if that completes the problem
+Days_in_year = NumDays.days #converts timedelta object into integer for calculation
+
+print(requests/Days_in_year) #returns requests/day
+#anything else needed here?
 
 # Q2: How many requests were made on a week-by-week basis? Per month?
 # A2: Take previous total number of requests and divide by number of weeks, then months.
