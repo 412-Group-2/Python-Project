@@ -4,10 +4,10 @@ Created by Group 2
 This program will fetch a specific http log file from the specified address.
 Using this log file, it will be parsed to show the total number of logs in the past 6 months, and all time logs.
 '''
-import re
-import requests #necessary module
-import os # necessary module
-from os.path import exists #neccesary module
+
+import requests
+import os
+from os.path import exists
 from datetime import datetime
 
 cwd = os.getcwd()
@@ -27,14 +27,55 @@ if file_exists == False: # conditional statement so the program will be able to 
             f.write(chunk)
     f.close() # creation and closing of the file locally
 
-'''
-with open('http_access_log.txt') as f: 
-    for line in f:
-        print(line.rstrip()) # re-opening file and then iterating through each line 1 time. 
-#Ben got rid of this and replaced it with a counter for all GET occurances in file.
-# IDK what "in the six months" means in the instructions but we'll cross that bridge tomorrow.
+
+# Q1: How many requests were made on each day?
+# A1: Count total number of requests, divide by number of days in file to average out.
+
+file = open('http_access_log.txt', 'r') # counting every single request
+data = file.read()
+requests = data.count("GET") # This value is the total number of requests in the file
+file.close()
+
+
+file = open('http_access_log.txt', 'r') # Open new file object (have to do this or it won't let your readlines())
+
+dayFirst = (file.readline())[11:22] #Puts the date (24/Oct/1994) as the valuable for this variable
+dayFinal = (file.readlines()[-1])[11:22] #Puts the date (11/Oct/1995) as the valuable for this variable
+
+
+date_first = datetime.strptime(dayFirst, '%d/%b/%Y') #turns dayFirst and dayFinal into datetime objects for NumDays calculation
+date_final = datetime.strptime(dayFinal, '%d/%b/%Y')
+
+NumDays = date_final - date_first 
+print(NumDays)
+
+Days_in_year = NumDays.days #converts timedelta object into integer for calculation
+
+print( 'Avg requests per day:', round(requests/Days_in_year, 2)) #returns requests/day
+#anything else needed here?
+
+# Q2: How many requests were made on a week-by-week basis? Per month?
+# A2: Take previous total number of requests and divide by number of weeks, then months.
+
+# Q3: What percentage of the requests were not successful (any 4xx status code)?
+# A3: How many requests have a 4XX status code?
+
+# Q4: What percentage of the requests were redirected elsewhere (any 3xx codes)?
+# A4: How many requests have a 3XX code? Divide this number by total requests for answer.
+
+# Q5: What was the most-requested file?
+# Q5: 
+    
+# Q6: What was the least-requested file?
+# Q6: 
+
+# Q7: Now every single month needs its own log file. 
+regex = re.comple('(.?) - - [(.?):(.) .] "[A-Z]{3,6} (.?) HTTP." (\d{3}) (.+)')
+# A7: We need to seperate the original file into 12 months and give each month its own new log file. Could use one function for each month's file to keep it clean. 
 
 '''
+BELOW IS ALL THE OF PART 1'S FILE PARSING THAT WE DID. WE DON'T NEED THIS EXACT CODE ANYMORE, BUT I LEFT IT DOWN HERE FOR REFERENCE ###
+
 #count every valid request in the file
 file = open('http_access_log.txt') 
 data = file.read()
@@ -56,40 +97,4 @@ file = open('six_months_access_log.txt')
 data = file.read()
 lastsixrequests = data.count("GET")
 print ('TOTAL REQUESTS OVER LAST SIX MONTHS FROM 11 OCT 1995 :', lastsixrequests)
-
-
-
-
-
-# Opens file (seems redundant but it was the only way I could get it to work)
-
-    # Do for each line in file
-
-
 '''
-    for line in file:
-        # Check if the line has brackets
-        if "[" in line:
-            # Use regex to find the date of the log line
-            temp = re.search(r"\[(.*?)\]", line)
-            # important: temp.group(0) is the regex'd info, .strip removes the brackets from that
-            # format is DD/MMM/YYYY:HH:MM:SS -Timezone (I think?)
-            # print(temp.group(0).strip("[]")) (I AM FOR TESTING)
-            # you might be able to convert to datetime and work from there
-            # reads to data (put in another nested if statement?)
-            # compare the data in temp to see if it is within 6 months from oct 11 1995
-            count = count + 1
-    
-            
-print ('TOTAL REQUESTS OVER LAST SIX MONTHS FROM 11 OCT 1995 :', count)
-
-#11/Apr/1995
-
-with open('http_access_logs.txt') as file:
-    for line in file:
-        print(line.rstrip())
-        
-#this change prints the requests line by line. Becasue the file is large this is better than printing a single object (list) with all the info. 
-
-'''
-
