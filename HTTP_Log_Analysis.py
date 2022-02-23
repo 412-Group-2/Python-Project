@@ -43,15 +43,15 @@ dayFirst = (file.readline())[11:22] #Puts the date (24/Oct/1994) as the valuable
 dayFinal = (file.readlines()[-1])[11:22] #Puts the date (11/Oct/1995) as the valuable for this variable
 
 
-date_first = datetime.strptime('24/Oct/1994', '%d/%b/%Y') #turns dayFirst and dayFinal into datetime objects for NumDays calculation
-date_final = datetime.strptime('11/Oct/1995', '%d/%b/%Y')
+date_first = datetime.strptime(dayFirst, '%d/%b/%Y') #turns dayFirst and dayFinal into datetime objects for NumDays calculation
+date_final = datetime.strptime(dayFinal, '%d/%b/%Y')
 
 NumDays = date_final - date_first 
 print(NumDays)
 
 Days_in_year = NumDays.days #converts timedelta object into integer for calculation
 
-print(requests/Days_in_year) #returns requests/day
+print( 'Avg requests per day:', round(requests/Days_in_year, 2)) #returns requests/day
 #anything else needed here?
 
 # Q2: How many requests were made on a week-by-week basis? Per month?
