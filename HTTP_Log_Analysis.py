@@ -42,8 +42,14 @@ file = open('http_access_log.txt', 'r') # Open new file object (have to do this 
 dayFirst = (file.readline())[11:22] #Puts the date (24/Oct/1994) as the valuable for this variable
 dayFinal = (file.readlines()[-1])[11:22] #Puts the date (11/Oct/1995) as the valuable for this variable
 
-#If someone can set up something with datetime to get the difference in days that finishes this first problem
 
+date_first = datetime.strptime('24/Oct/1994', '%d/%b/%Y') #turns dayFirst and dayFinal into datetime objects for NumDays calculation
+date_final = datetime.strptime('11/Oct/1995', '%d/%b/%Y')
+
+NumDays = date_final - date_first 
+print(NumDays)
+
+#this returns the difference in days but idk if that completes the problem
 
 # Q2: How many requests were made on a week-by-week basis? Per month?
 # A2: Take previous total number of requests and divide by number of weeks, then months.
