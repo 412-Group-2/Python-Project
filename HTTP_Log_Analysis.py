@@ -89,6 +89,7 @@ for line in file:
 print(months)
 
 # Q3: What percentage of the requests were not successful (any 4xx status code)?
+([a-z]*?) - - \[(.*?):(.*?) -([0-9]*?)\] \"[A-Z]*? (.*?) .*? (4\d\d )
 # A3: How many requests have a 4XX status code?
 
 # Q4: What percentage of the requests were redirected elsewhere (any 3xx codes)?
